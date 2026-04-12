@@ -1,0 +1,32 @@
+[
+  {
+    "id": "HYNpmJj81fk8sT7zPGoBT",
+    "title": "Испытание: Silk",
+    "priority": "Low",
+    "industry": "machinery"
+  },
+  {
+    "id": "KycwD7KtznAdIGjxnbR_l",
+    "title": "Испытание: Wooden",
+    "priority": "High",
+    "industry": "machinery"
+  },
+  {
+    "id": "TVhKikiiXokJzZbmbtIYR",
+    "title": "Испытание: Steel",
+    "priority": "High",
+    "industry": "machinery"
+  },
+  {
+    "id": "wh5gTU4kPUlA6UElm_Ps-",
+    "title": "Испытание: Wooden",
+    "priority": "Critical",
+    "industry": "machinery"
+  },
+  {
+    "id": "I0r8Bi8f20KqeH9wJKotO",
+    "title": "Испытание: Plastic",
+    "priority": "Critical",
+    "industry": "machinery"
+  }
+]

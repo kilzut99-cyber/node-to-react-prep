@@ -1,0 +1,28 @@
+{
+  "name": "node-to-react-prep",
+  "version": "1.0.0",
+  "description": "Научиться работать в терминале, инициализировать проекты через `npm`, управлять зависимостями, использовать встроенные модули **Node.js** и автоматизировать рутинные задачи с помощью скриптов, пройти путь от настройки пустой папки до создания автоматизированной системы управления данными для вашего будущего  **React**-приложения.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+  "dev": "node src/generator.js",
+  "validate": "node src/validator.js",
+  "server": "npx serve data"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kilzut99-cyber/node-to-react-prep.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kilzut99-cyber/node-to-react-prep/issues"
+  },
+  "homepage": "https://github.com/kilzut99-cyber/node-to-react-prep#readme",
+  "dependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "chalk": "^5.6.2",
+    "nanoid": "^5.1.7"
+  }
+}
