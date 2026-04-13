@@ -1,45 +1,39 @@
-import fs from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'fs/promises'; // ПОЧЕМУ: работаем асинхронно, чтобы не блокировать поток при чтении тяжелых отчетов
 import chalk from 'chalk';
 
-// Настройка путей для ES-модулей
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-async function validateDatabase() {
-  const dataPath = path.join(__dirname, '../data/db.json');
-  // ПОЧЕМУ: Используем path.join для формирования абсолютного пути, чтобы скрипт корректно находил файл db.json вне зависимости от того, из какой папки запущен терминал.
-
+async function validateData() {
   try {
-    // Чтение данных
-    const rawData = await fs.readFile(dataPath, 'utf-8');
-    // ПОЧЕМУ: Используем асинхронный readFile, чтобы не блокировать выполнение других процессов (Non-blocking I/O).
-    
-    const tasks = JSON.parse(rawData);
+    // Читаем базу данных испытаний
+    const data = await fs.readFile('./data/db.json', 'utf-8');
+    const parsed = JSON.parse(data);
 
-    console.log(chalk.blue('--- Запуск валидации данных (Машиностроение) ---'));
+    // 1. Проверяем корневую структуру для стейта React
+    if (!parsed.products || !Array.isArray(parsed.products)) {
+      throw new Error('Некорректная структура: отсутствует реестр изделий');
+    }
 
-    tasks.forEach((task, index) => {
-      const errors = [];
-
-      // Проверка структуры (ЭТАП 2 JUNIOR)
-      if (!task.id) errors.push("Отсутствует уникальный ID");
-      if (!task.title) errors.push("Отсутствует название испытания");
-      if (task.industry !== 'machinery') errors.push("Неверная отраслевая принадлежность");
-
-      if (errors.length === 0) {
-        console.log(chalk.green(`[OK] Запись ${index + 1}: ${task.title}`));
-      } else {
-        console.log(chalk.red(`[ERROR] Запись ${index + 1}: ${errors.join(', ')}`));
-      }
+    // 2. Валидация под специфику «Виртуальных испытаний»
+    const isValid = parsed.products.every(product => {
+      // ПОЧЕМУ: Для виртуального моделирования важен ID (связь с чертежом) 
+      // и наличие числовых характеристик для расчетов
+      return (
+        product.id && 
+        typeof product.name === 'string' &&
+        !isNaN(parseFloat(product.price)) // В контексте испытаний это может быть "предельная нагрузка" или "стоимость материала"
+      );
     });
 
-    console.log(chalk.blue('-----------------------------------------------'));
+    if (isValid) {
+      console.log(chalk.blue('🔍 Валидация пройдена: данные пригодны для виртуального моделирования.'));
+      console.log(chalk.gray(`Проверено объектов: ${parsed.products.length}`));
+    } else {
+      console.log(chalk.red('❌ Ошибка данных: найдены объекты с неполными характеристиками для испытаний.'));
+    }
+
   } catch (error) {
-    // ПОЧЕМУ: Оборачиваем в try...catch, чтобы в случае отсутствия файла или ошибки в JSON программа не "падала", а выводила понятное сообщение.
-    console.error(chalk.bgRed(' ОШИБКА ЧТЕНИЯ БАЗЫ ДАННЫХ: '), error.message);
+    // Используем желтый для предупреждений, как советовал Виталий Валентинович
+    console.error(chalk.yellow('⚠️ Ошибка валидации:'), error.message);
   }
 }
 
-validateDatabase();
+validateData();

@@ -1,32 +1,64 @@
-[
-  {
-    "id": "HYNpmJj81fk8sT7zPGoBT",
-    "title": "Испытание: Silk",
-    "priority": "Low",
-    "industry": "machinery"
-  },
-  {
-    "id": "KycwD7KtznAdIGjxnbR_l",
-    "title": "Испытание: Wooden",
-    "priority": "High",
-    "industry": "machinery"
-  },
-  {
-    "id": "TVhKikiiXokJzZbmbtIYR",
-    "title": "Испытание: Steel",
-    "priority": "High",
-    "industry": "machinery"
-  },
-  {
-    "id": "wh5gTU4kPUlA6UElm_Ps-",
-    "title": "Испытание: Wooden",
-    "priority": "Critical",
-    "industry": "machinery"
-  },
-  {
-    "id": "I0r8Bi8f20KqeH9wJKotO",
-    "title": "Испытание: Plastic",
-    "priority": "Critical",
-    "industry": "machinery"
-  }
-]
+{
+  "products": [
+    {
+      "id": "g3bciOkXlTj2dD33vJII9",
+      "name": "Rubber Frozen Aluminum Soap",
+      "strengthLimit": 700,
+      "tolerance": 0.1
+    },
+    {
+      "id": "Ro00ajXFry990ItDkjMc7",
+      "name": "Aluminum Refined Bronze Shoes",
+      "strengthLimit": 642,
+      "tolerance": 0.06
+    },
+    {
+      "id": "iXZTA8DM7t5oGeLspNoY0",
+      "name": "Metal Ergonomic Rubber Towels",
+      "strengthLimit": 753,
+      "tolerance": 0.09
+    },
+    {
+      "id": "9-Cb0AEhje-47hEI2iS9D",
+      "name": "Granite Electronic Gold Soap",
+      "strengthLimit": 299,
+      "tolerance": 0.1
+    },
+    {
+      "id": "EPACsuiGoi6pRGJGQvM6r",
+      "name": "Rubber Frozen Silk Bike",
+      "strengthLimit": 617,
+      "tolerance": 0.04
+    },
+    {
+      "id": "xt_1srQShduaCv5s5pXeH",
+      "name": "Gold Fresh Silk Hat",
+      "strengthLimit": 286,
+      "tolerance": 0.08
+    },
+    {
+      "id": "1dt9fmdLv4IlAQoIs12Bj",
+      "name": "Metal Generic Steel Chicken",
+      "strengthLimit": 738,
+      "tolerance": 0.03
+    },
+    {
+      "id": "KkCG-sjSUCL0soSjkV4Rh",
+      "name": "Bamboo Unbranded Rubber Car",
+      "strengthLimit": 394,
+      "tolerance": 0.07
+    },
+    {
+      "id": "LSv2tsm6WSxwUBLuGGj72",
+      "name": "Wooden Elegant Marble Hat",
+      "strengthLimit": 797,
+      "tolerance": 0.03
+    },
+    {
+      "id": "GFrSyNxE6ji5R1k93B4wX",
+      "name": "Plastic Rustic Rubber Chicken",
+      "strengthLimit": 466,
+      "tolerance": 0.09
+    }
+  ]
+}

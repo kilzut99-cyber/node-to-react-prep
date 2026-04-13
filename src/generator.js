@@ -1,32 +1,32 @@
-import fs from 'fs/promises'; 
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { faker } from '@faker-js/faker';
 import { nanoid } from 'nanoid';
+import fs from 'fs/promises'; // ПОЧЕМУ: асинхронность обязательна для неблокирующего Event Loop
+import path from 'path';
 import chalk from 'chalk';
 
-// Настройка путей для ES-модулей
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const DB_PATH = path.join('data', 'db.json');
 
 async function generateData() {
   try {
-    const tasks = Array.from({ length: 5 }, () => ({
-      id: nanoid(), // ПОЧЕМУ: React нужны уникальные key для идентификации элементов списка
-      title: `Испытание: ${faker.commerce.productMaterial()}`,
-      priority: faker.helpers.arrayElement(['Low', 'High', 'Critical']),
-      industry: 'machinery'
+    const products = Array.from({ length: 10 }, () => ({
+      // ПОЧЕМУ nanoid: в React это уникальный key для рендеринга строк в таблице испытаний
+      id: nanoid(), 
+      // Специфика: название детали и её инженерные параметры
+      name: faker.commerce.productMaterial() + " " + faker.commerce.productName(),
+      strengthLimit: faker.number.int({ min: 200, max: 800 }), // МПа (Предел прочности)
+      tolerance: faker.number.float({ min: 0.01, max: 0.1, fractionDigits: 2 }) // Допуск в мм
     }));
 
-    const dataPath = path.join(__dirname, '../data/db.json'); 
-    // ПОЧЕМУ: path.join гарантирует правильные слэши (/) в путях на Windows и Linux
-
-    await fs.writeFile(dataPath, JSON.stringify(tasks, null, 2)); 
-    // ПОЧЕМУ: writeFile (асинхронный) не блокирует основной поток, в отличие от writeFileSync
-
-    console.log(chalk.green('✔ Успех: База задач для машиностроения создана!'));
+    const data = JSON.stringify({ products }, null, 2);
+    
+    // Используем await, чтобы не блокировать поток выполнения
+    await fs.writeFile(DB_PATH, data); 
+    
+    console.log(chalk.green('✅ Данные для виртуальных испытаний успешно сгенерированы!'));
   } catch (error) {
-    console.error(chalk.red('✘ Ошибка генерации:'), error);
+    console.error(chalk.red('❌ Ошибка генерации:'), error.message);
   }
 }
+
 generateData();
+
